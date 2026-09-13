@@ -11,7 +11,6 @@ sample worlds supplied in the starter folder.
 
 def move_right():
     if facing_east() and not right_is_clear() and not left_is_clear() and not front_is_clear():
-        print("wtf")
         put_beeper()
     else:
         if not front_is_clear():

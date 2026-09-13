@@ -20,7 +20,8 @@ def main():
     Running the world with the 1x8.w world causes Karel to crash.
     """
     for i in range(2):
-        move()
+        if front_is_clear():
+            move()
     put_beeper()
 
 

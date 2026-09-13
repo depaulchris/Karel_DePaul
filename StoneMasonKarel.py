@@ -9,25 +9,9 @@ should make sure that your program works for all of the
 sample worlds supplied in the starter folder.
 """
 
-
-#def __init__(self):
-#    self.descent = False
-#    self.beepers = False
-#    self.run()
-
 def descend():
     while front_is_clear():
-        if beepers_present():
-            move()
-            if no_beepers_present():
-                while no_beepers_present():
-                    if front_is_clear():
-                        beeper_check()
-                        move()
-                    else:
-                        beeper_check()
-        else:
-            move()
+        beeper_check()
     if front_is_blocked():
         turn_left()
         if front_is_clear():
@@ -37,29 +21,28 @@ def descend():
 
 def ascend():
     while front_is_clear():
-        if beepers_present():
-            move()
-            if no_beepers_present():
-                while no_beepers_present():
-                    if front_is_clear():
-                        beeper_check()
-                        move()
-                    else:
-                        beeper_check()
-        else:
-            move()
+        beeper_check()
     if front_is_blocked():
         turn_around()
         descend()
 
 def turn_around():
-    for i in range (0,2):
+    for i in range (2):
         turn_left()
 
 def beeper_check():
-    if no_beepers_present():
-        put_beeper()
-
+    if beepers_present():
+        move()
+        if no_beepers_present():
+            while no_beepers_present():
+                if front_is_clear():
+                    put_beeper()
+                    move()
+                else:
+                    put_beeper()
+    else:
+        move()
+    
 def run():
     turn_left()
     ascend()
@@ -73,4 +56,4 @@ def main():
 # There is no need to edit code beyond this point
 
 if __name__ == "__main__":
-    run_karel_program()
+    run_karel_program("")
