@@ -16,14 +16,14 @@ class StoneMasonKarel:
         self.run()
     
     def descend(self):
-        while(front_is_clear()):
+        while front_is_clear():
             self.beeper_check()
             move()
-        if (front_is_blocked()):
+        if front_is_blocked():
             self.beeper_check()
-            self.beepers = self.beepers = False
+            self.beepers = False
             turn_left()
-            if (front_is_blocked()):
+            if front_is_blocked():
                 return
             move()
             turn_left()
@@ -31,8 +31,8 @@ class StoneMasonKarel:
 
     def ascend(self):
         self.descent = False
-        while(front_is_clear()):
-            if (beepers_present()):
+        while front_is_clear():
+            if beepers_present():
                 self.beepers = True
             move() 
         if front_is_blocked():
@@ -45,8 +45,8 @@ class StoneMasonKarel:
             turn_left()
 
     def beeper_check(self):
-        if (self.beepers):
-            if (no_beepers_present()):
+        if self.beepers:
+            if no_beepers_present():
                 put_beeper()
 
     def run(self):
@@ -55,7 +55,7 @@ class StoneMasonKarel:
 
 def main():
     """
-    The code below initializes the StoneMasonKarel class.
+    The code below initializes the StoneMasonKarel class and starts the program.
     """
     game = StoneMasonKarel()
 

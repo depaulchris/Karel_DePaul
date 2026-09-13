@@ -11,28 +11,34 @@ sample worlds supplied in the starter folder.
 class CheckerboardKarel:
     def __init__(self):
         self.steps = 0
+        self.vertical = False
         self.run()
     
     def move_right(self):
-        while(front_is_clear()):
+        while front_is_clear():
             self.beeper_check()
             move()
             self.steps += 1
-        if (front_is_blocked()):
+        if front_is_blocked():
+            self.vertical = True
             turn_left()
+            if self.vertical:
+                self.beeper_check(True)
+            if front_is_blocked():
+                return
             move()
             self.steps += 1
             turn_left()
             self.move_left()
 
     def move_left(self):
-        while(front_is_clear()):
+        while front_is_clear():
             self.beeper_check()
             move()
             self.steps += 1
         if front_is_blocked():
             self.turn_around_left()
-            if (front_is_blocked()):
+            if front_is_blocked():
                 return
             move()
             self.steps += 1
@@ -43,20 +49,20 @@ class CheckerboardKarel:
         for i in range (0,3):
             turn_left()
 
-    def beeper_check(self):
-        if (self.steps + 1) % 2 != 0:
-            put_beeper()
+    def beeper_check(self, vertical = False):
+        if not vertical:
+            if (self.steps + 1) % 2 != 0:
+                put_beeper()
+        else:
+            if self.steps % 2 == 0:
+                put_beeper()
 
     def run(self):
-        #turn_left()
         self.move_right()
 
 def main():
     """
-    You should write your code to make Karel do its task in
-    this function. Make sure to delete the 'pass' line before
-    starting to write your own code. You should also delete this
-    comment and replace it with a better, more descriptive one.
+    The code below intializes the Checkerboard Karel class and starts the program.
     """
     game = CheckerboardKarel()
 
