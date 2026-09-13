@@ -66,7 +66,7 @@ def run():
 
 def main():
     """
-    The code below uses the run function to begin the program.
+    The code below uses the run function to begin the program, which checks for the presence of beepers in both directions.
     """
     run()
 

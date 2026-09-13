@@ -8,66 +8,95 @@ a checkerboard using beepers, as described in Assignment 1.
 You should make sure that your program works for all of the 
 sample worlds supplied in the starter folder.
 """
-class CheckerboardKarel:
-    def __init__(self):
-        self.steps = 0
-        self.vertical = False
-        self.run()
-    
-    def move_right(self):
-        while front_is_clear():
-            self.beeper_check()
-            move()
-            self.steps += 1
-        if front_is_blocked():
-            self.vertical = True
-            turn_left()
-            if self.vertical:
-                self.beeper_check(True)
-            if front_is_blocked():
-                return
-            move()
-            self.steps += 1
-            turn_left()
-            self.move_left()
 
-    def move_left(self):
-        while front_is_clear():
-            self.beeper_check()
-            move()
-            self.steps += 1
-        if front_is_blocked():
-            self.turn_around_left()
-            if front_is_blocked():
-                return
-            move()
-            self.steps += 1
-            self.turn_around_left()
-            self.move_right()
-
-    def turn_around_left(self):
-        for i in range (0,3):
+def move_right():
+    if facing_east() and not right_is_clear() and not left_is_clear():
+        put_beeper()
+    else:
+        if not front_is_clear():
             turn_left()
-
-    def beeper_check(self, vertical = False):
-        if not vertical:
-            if (self.steps + 1) % 2 != 0:
-                put_beeper()
+            if not right_is_clear() and not left_is_clear():
+                while front_is_clear():
+                    for i in range(100):
+                        print(i)
+                        if front_is_clear():
+                            if i % 2 == 0:
+                                put_beeper()
+                            move()
+                        else: 
+                            if i % 2 == 0:
+                                put_beeper()
+                            turn_left()
+                            move()
+                            turn_left()
+                            move_left()
         else:
-            if self.steps % 2 == 0:
-                put_beeper()
+            while front_is_clear():
+                for i in range(100):
+                    if front_is_clear():
+                        if i % 2 == 0:
+                            put_beeper()
+                        move()
+                    else: 
+                        if facing_east():
+                            if i % 2 == 0:
+                                put_beeper()
+                            turn_left()
+                            move()
+                            turn_left()
+                            if (i + 1) % 2 != 0:
+                                move_left_odd()
+                            else:
+                                move_left()
 
-    def run(self):
-        self.move_right()
+
+def move_left_odd():
+    while front_is_clear():
+        for i in range(100):
+            if front_is_clear():
+                if i % 2 != 0:
+                    put_beeper()
+                move()
+            else:
+                if right_is_clear() and left_is_clear():
+                    turn_around_left()
+                    move()
+                    turn_around_left()
+                    move_right()
+
+def move_left():
+    while front_is_clear():
+        for i in range(100):
+            if front_is_clear():
+                if i % 2 == 0:
+                    put_beeper()
+                move()
+            else:
+                if right_is_clear() and left_is_clear():
+                    turn_around_left()
+                    move()
+                    turn_around_left()
+                    move_right()
+
+def turn_around_left():
+    for i in range (3):
+        turn_left()
+
+def beeper_check():
+    put_beeper()
+
+def run():
+    move_right()
 
 def main():
     """
     The code below intializes the Checkerboard Karel class and starts the program.
     """
-    game = CheckerboardKarel()
+    run()
 
 
 # There is no need to edit code beyond this point
 
 if __name__ == "__main__":
-    run_karel_program()
+    run_karel_program("7x7.w")
+    #run_karel_program("")
