@@ -17,7 +17,7 @@ def move_right():
             turn_left()
             if not right_is_clear() and not left_is_clear():
                 while front_is_clear():
-                    for i in range(100):
+                    for i in range(4):
                         print(i)
                         if front_is_clear():
                             if i % 2 == 0:
@@ -27,9 +27,6 @@ def move_right():
                             if i % 2 == 0:
                                 put_beeper()
                             turn_left()
-                            move()
-                            turn_left()
-                            move_left()
         else:
             while front_is_clear():
                 for i in range(100):
@@ -42,12 +39,13 @@ def move_right():
                             if i % 2 == 0:
                                 put_beeper()
                             turn_left()
-                            move()
-                            turn_left()
-                            if (i + 1) % 2 != 0:
-                                move_left_odd()
-                            else:
-                                move_left()
+                            if front_is_clear():
+                                move()
+                                turn_left()
+                                if (i + 1) % 2 != 0:
+                                    move_left_odd()
+                                else:
+                                    move_left()
 
 
 def move_left_odd():
@@ -82,15 +80,12 @@ def turn_around_left():
     for i in range (3):
         turn_left()
 
-def beeper_check():
-    put_beeper()
-
 def run():
     move_right()
 
 def main():
     """
-    The code below intializes the Checkerboard Karel class and starts the program.
+    The code below uses the run function to begin the program.
     """
     run()
 
@@ -98,5 +93,5 @@ def main():
 # There is no need to edit code beyond this point
 
 if __name__ == "__main__":
-    run_karel_program("7x7.w")
+    run_karel_program("40x40.w")
     #run_karel_program("")
