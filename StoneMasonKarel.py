@@ -9,55 +9,66 @@ should make sure that your program works for all of the
 sample worlds supplied in the starter folder.
 """
 
-class StoneMasonKarel:
-    def __init__(self):
-        self.descent = False
-        self.beepers = False
-        self.run()
-    
-    def descend(self):
-        while front_is_clear():
-            self.beeper_check()
+
+#def __init__(self):
+#    self.descent = False
+#    self.beepers = False
+#    self.run()
+
+def descend():
+    while front_is_clear():
+        if beepers_present():
             move()
-        if front_is_blocked():
-            self.beeper_check()
-            self.beepers = False
-            turn_left()
-            if front_is_blocked():
-                return
-            move()
-            turn_left()
-            self.ascend()
-
-    def ascend(self):
-        self.descent = False
-        while front_is_clear():
-            if beepers_present():
-                self.beepers = True
-            move() 
-        if front_is_blocked():
-            self.descent = True
-            self.turn_around()
-            self.descend()
-
-    def turn_around(self):
-        for i in range (0,2):
-            turn_left()
-
-    def beeper_check(self):
-        if self.beepers:
             if no_beepers_present():
-                put_beeper()
-
-    def run(self):
+                while no_beepers_present():
+                    if front_is_clear():
+                        beeper_check()
+                        move()
+                    else:
+                        beeper_check()
+        else:
+            move()
+    if front_is_blocked():
         turn_left()
-        self.ascend()
+        if front_is_clear():
+            move()
+            turn_left()
+            ascend()
+
+def ascend():
+    while front_is_clear():
+        if beepers_present():
+            move()
+            if no_beepers_present():
+                while no_beepers_present():
+                    if front_is_clear():
+                        beeper_check()
+                        move()
+                    else:
+                        beeper_check()
+        else:
+            move()
+    if front_is_blocked():
+        turn_around()
+        descend()
+
+def turn_around():
+    for i in range (0,2):
+        turn_left()
+
+def beeper_check():
+    if no_beepers_present():
+        put_beeper()
+
+def run():
+    turn_left()
+    ascend()
 
 def main():
     """
-    The code below initializes the StoneMasonKarel class and starts the program.
+    The code below uses the run function to begin the program.
     """
-    game = StoneMasonKarel()
+    run()
 
 # There is no need to edit code beyond this point
 

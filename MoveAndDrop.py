@@ -19,7 +19,7 @@ def main():
     It also initializes the program with a 3 by 1 world as described in the above docstring.
     Running the world with the 1x8.w world causes Karel to crash.
     """
-    for i in range(0, 2):
+    for i in range(2):
         move()
     put_beeper()
 
