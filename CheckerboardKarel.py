@@ -10,7 +10,8 @@ sample worlds supplied in the starter folder.
 """
 
 def move_right():
-    if facing_east() and not right_is_clear() and not left_is_clear():
+    if facing_east() and not right_is_clear() and not left_is_clear() and not front_is_clear():
+        print("wtf")
         put_beeper()
     else:
         if not front_is_clear():
@@ -18,7 +19,6 @@ def move_right():
             if not right_is_clear() and not left_is_clear():
                 while front_is_clear():
                     for i in range(4):
-                        print(i)
                         if front_is_clear():
                             if i % 2 == 0:
                                 put_beeper()
@@ -46,7 +46,6 @@ def move_right():
                                     move_left_odd()
                                 else:
                                     move_left()
-
 
 def move_left_odd():
     while front_is_clear():
@@ -89,9 +88,8 @@ def main():
     """
     run()
 
-
 # There is no need to edit code beyond this point
 
 if __name__ == "__main__":
-    run_karel_program("40x40.w")
+    run_karel_program("8x1.w")
     #run_karel_program("")
