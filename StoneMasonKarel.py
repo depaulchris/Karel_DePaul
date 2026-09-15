@@ -56,4 +56,4 @@ def main():
 # There is no need to edit code beyond this point
 
 if __name__ == "__main__":
-    run_karel_program("")
+    run_karel_program("SampleQuad1.w")

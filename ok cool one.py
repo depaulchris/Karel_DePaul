@@ -15,47 +15,36 @@ assume that it is at least as tall as it is wide.
 def move_karel():
     while front_is_clear():
         for i in range(2):
-            if front_is_clear():
-                move()
-        if front_is_clear():
-            turn_around()
+            if front_is_blocked():
+                turn_around()
+                beeper_cleaner()
+                #move_karel_at_wall()
             move()
-            put_beeper()
-            turn_around()
-    if front_is_blocked():
         turn_around()
         move()
         put_beeper()
         turn_around()
+
+def move_karel_at_wall():
+    turn_around()
+    while front_is_clear() and no_beepers_present():
+        move()
+    if beepers_present():
+        pick_beeper()
+        move()
         beeper_cleaner()
 
 def beeper_cleaner():
     while front_is_clear() and no_beepers_present():
         move()
-    #pick_beeper()
-    #move()
-    print("ending point? line 50")
-    while beepers_present():
-        move()
-    print("ending point? line 53")
-    turn_around()
+    pick_beeper()
     move()
     if beepers_present():
-        move()
-    else:
-        print("ending point? line 59")
+        while beepers_present():
+            move()
         turn_around()
         move()
-    if beepers_present():
-        turn_around()
-        move()
-        pick_beeper()
-        turn_around()
         beeper_cleaner()
-    print("HARLEM SHAKE? line 68")
-    turn_around()
-    move()
-   
 
 
 
@@ -80,4 +69,4 @@ def main():
 # There is no need to edit code beyond this point
 
 if __name__ == "__main__":
-    run_karel_program("")
+    run_karel_program("8x8.w")
